@@ -1,150 +1,91 @@
-<!--
-AppAds GitHub Pages Template (single-file)
-How to use:
-1) Save this file as index.html in your repository root.
-2) Edit the `ads` array below to add/remove app ads (title, image, link, platform, description).
-3) Commit & push to a GitHub repo named either `username.github.io` (personal site) or any repo (project site).
-4) Enable GitHub Pages in repo Settings → Pages and choose branch `main` (or `gh-pages`).
-
-This file is intentionally self-contained (CSS + JS in one file) so you can deploy quickly.
--->
-
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>AppAds — simple app ad gallery</title>
-  <meta name="description" content="Lightweight app ad gallery you can host on GitHub Pages." />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>1Car2Wills Games</title>
   <style>
-    :root{--bg:#0f1724;--card:#0b1220;--muted:#9aa4b2;--accent:#3b82f6}
-    *{box-sizing:border-box}
-    body{font-family:Inter,system-ui,Segoe UI,Roboto,"Helvetica Neue",Arial;margin:0;background:linear-gradient(180deg,#071126 0%, #071526 100%);color:#e6eef6}
-    header{padding:28px 20px;display:flex;align-items:center;justify-content:space-between;gap:16px}
-    .brand{display:flex;gap:12px;align-items:center}
-    .logo{width:44px;height:44px;border-radius:8px;background:linear-gradient(135deg,#2563eb,#06b6d4);display:flex;align-items:center;justify-content:center;font-weight:700}
-    h1{margin:0;font-size:20px}
-    p.lead{margin:4px 0 0;color:var(--muted);font-size:13px}
-    .controls{display:flex;gap:8px;align-items:center}
-    input.search{padding:10px 12px;border-radius:8px;border:0;min-width:220px}
-    select.filter{padding:10px;border-radius:8px;border:0;background:#092032;color:inherit}
-
-    main{padding:20px}
-    .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:16px}
-    .card{background:var(--card);padding:12px;border-radius:12px;box-shadow:0 6px 18px rgba(2,6,23,.6);display:flex;flex-direction:column;min-height:220px}
-    .thumb{width:100%;height:140px;border-radius:8px;overflow:hidden;flex-shrink:0;background:#061226}
-    .thumb img{width:100%;height:100%;object-fit:cover;display:block}
-    .meta{padding-top:10px;flex:1;display:flex;flex-direction:column}
-    .title{font-weight:600;font-size:15px;margin:0}
-    .desc{color:var(--muted);font-size:13px;margin-top:6px;flex:1}
-    .cta{display:flex;gap:8px;align-items:center;margin-top:10px}
-    .btn{padding:8px 10px;border-radius:8px;background:var(--accent);color:white;text-decoration:none;font-weight:600}
-    .badge{padding:6px 8px;border-radius:999px;background:#0c1724;color:var(--muted);font-size:12px}
-    footer{padding:18px 20px;color:var(--muted);font-size:13px;text-align:center}
-
-    /* small screens */
-    @media (max-width:420px){header{flex-direction:column;align-items:flex-start}.controls{width:100%}.controls input{width:100%}}
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: white;
+      color: #333;
+      text-align: center;
+    }
+    header {
+      padding: 20px;
+    }
+    header img {
+      max-height: 80px;
+    }
+    .games {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+      padding: 20px;
+    }
+    .game {
+      width: 300px;
+      border-radius: 10px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+      overflow: hidden;
+      background: #fff;
+      text-align: center;
+    }
+    .game img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+    .game h2 {
+      margin: 10px 0;
+      font-size: 18px;
+    }
+    .game a {
+      display: inline-block;
+      margin: 10px 0 20px;
+      padding: 10px 20px;
+      background: #4285f4;
+      color: #fff;
+      text-decoration: none;
+      border-radius: 5px;
+      transition: background 0.3s;
+    }
+    .game a:hover {
+      background: #3367d6;
+    }
+    @media (max-width: 768px) {
+      .games {
+        flex-direction: column;
+        align-items: center;
+      }
+    }
   </style>
 </head>
 <body>
   <header>
-    <div class="brand">
-      <div class="logo">AA</div>
-      <div>
-        <h1>AppAds</h1>
-        <p class="lead">A simple, privacy-friendly place to showcase mobile & web apps.</p>
-      </div>
-    </div>
-
-    <div class="controls">
-      <input id="search" class="search" placeholder="Search apps..." aria-label="Search apps">
-      <select id="platformFilter" class="filter" aria-label="Filter by platform">
-        <option value="all">All platforms</option>
-        <option value="android">Android</option>
-        <option value="ios">iOS</option>
-        <option value="web">Web</option>
-      </select>
-    </div>
+    <img src="logo.png" alt="1Car2Wills Games Logo">
   </header>
 
-  <main>
-    <section class="grid" id="grid" aria-live="polite"></section>
-  </main>
+  <section class="games">
+    <div class="game">
+      <img src="img1.png" alt="Rematched Ego">
+      <h2>Rematched Ego</h2>
+      <a href="https://play.google.com/store/apps/details?id=com.willdev.RematchedEgo" target="_blank">View on Google Play</a>
+    </div>
 
-  <footer>
-    Tip: Replace the `ads` array inside this file with your own ad data. Use small images (<=200KB) and enable lazy loading for faster pages.
-  </footer>
+    <div class="game">
+      <img src="img2.png" alt="Project Breach Remastered">
+      <h2>Project Breach Remastered</h2>
+      <a href="https://play.google.com/store/apps/details?id=com.willdev.projectbreachremastered" target="_blank">View on Google Play</a>
+    </div>
 
-  <script>
-    // SAMPLE DATA: edit this array to add your app ads
-    const ads = [
-      {
-        id: 1,
-        title: "Space Runner",
-        desc: "Endless runner with neon art and 1-tap controls.",
-        img: "https://via.placeholder.com/800x450.png?text=Space+Runner",
-        link: "https://play.google.com/store/apps/details?id=com.example.spacerunner",
-        platform: "android"
-      },
-      {
-        id: 2,
-        title: "NoteLight",
-        desc: "Simple online notes with markdown support.",
-        img: "https://via.placeholder.com/800x450.png?text=NoteLight",
-        link: "https://notelight.example.com",
-        platform: "web"
-      },
-      {
-        id: 3,
-        title: "Pocket Chef",
-        desc: "Recipe app with offline mode and shopping list.",
-        img: "https://via.placeholder.com/800x450.png?text=Pocket+Chef",
-        link: "https://apps.apple.com/app/id123456789",
-        platform: "ios"
-      }
-    ];
-
-    const grid = document.getElementById('grid');
-    const searchInput = document.getElementById('search');
-    const filter = document.getElementById('platformFilter');
-
-    function render(list){
-      grid.innerHTML = '';
-      if(!list.length){grid.innerHTML = '<p style="color:var(--muted)">No apps found.</p>';return}
-      for(const a of list){
-        const el = document.createElement('article');
-        el.className = 'card';
-        el.innerHTML = `
-          <div class="thumb"><a href="${a.link}" target="_blank" rel="noopener noreferrer"><img loading="lazy" src="${a.img}" alt="${a.title} thumbnail"></a></div>
-          <div class="meta">
-            <h3 class="title">${a.title}</h3>
-            <p class="desc">${a.desc}</p>
-            <div class="cta">
-              <a class="btn" href="${a.link}" target="_blank" rel="noopener noreferrer">Visit</a>
-              <div class="badge">${a.platform.toUpperCase()}</div>
-            </div>
-          </div>
-        `;
-        grid.appendChild(el);
-      }
-    }
-
-    function applyFilters(){
-      const q = searchInput.value.trim().toLowerCase();
-      const p = filter.value;
-      const filtered = ads.filter(a=>{
-        if(p!=='all' && a.platform!==p) return false;
-        if(q && !(a.title.toLowerCase().includes(q) || a.desc.toLowerCase().includes(q))) return false;
-        return true;
-      });
-      render(filtered);
-    }
-
-    searchInput.addEventListener('input', applyFilters);
-    filter.addEventListener('change', applyFilters);
-
-    // initial render
-    render(ads);
-  </script>
+    <div class="game">
+      <img src="img3.png" alt="Project Decay">
+      <h2>Project Decay</h2>
+      <a href="https://play.google.com/store/apps/details?id=com.willdev.ProjectDecay" target="_blank">View on Google Play</a>
+    </div>
+  </section>
 </body>
 </html>
