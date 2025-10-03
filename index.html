@@ -55,6 +55,19 @@
     .game a:hover {
       background: #3367d6;
     }
+    .game .custom-button {
+      background: none;
+      padding: 0;
+    }
+    .game .custom-button img {
+      width: 180px;
+      height: auto;
+      border-radius: 5px;
+      transition: transform 0.2s;
+    }
+    .game .custom-button img:hover {
+      transform: scale(1.05);
+    }
     @media (max-width: 768px) {
       .games {
         flex-direction: column;
@@ -85,6 +98,15 @@
       <img src="img3.png" alt="Project Decay">
       <h2>Project Decay</h2>
       <a href="https://play.google.com/store/apps/details?id=com.willdev.ProjectDecay" target="_blank">View on Google Play</a>
+    </div>
+
+    <!-- New Game Card -->
+    <div class="game">
+      <img src="UBLogo.png" alt="Unmatched Basketball">
+      <h2>Unmatched Basketball</h2>
+      <a href="https://www.crazygames.com/game/unmatched-basketball" target="_blank" class="custom-button">
+        <img src="PlayCG.png" alt="Play on CrazyGames">
+      </a>
     </div>
   </section>
 </body>
