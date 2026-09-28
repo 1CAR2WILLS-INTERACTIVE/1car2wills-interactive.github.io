@@ -1,153 +1,326 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>1Car2Wills Games</title>
-  <style>
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: white;
-      color: #333;
-      text-align: center;
-    }
-    header {
-      padding: 30px;
-    }
-    header img {
-      max-height: 150px;
-    }
-    header p {
-      margin-top: 10px;
-      font-size: 14px;
-      color: #666;
-    }
-    .games {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 20px;
-      padding: 20px;
-    }
-    .game {
-      width: 300px;
-      border-radius: 10px;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.15);
-      overflow: hidden;
-      background: #fff;
-      text-align: center;
-      padding-bottom: 10px;
-    }
-    .game img {
-      width: 100%;
-      height: auto;
-      display: block;
-    }
-    .game h2 {
-      margin: 10px 0;
-      font-size: 18px;
-    }
-    .game a {
-      display: inline-block;
-      margin: 10px 0 5px;
-      padding: 10px 20px;
-      background: #4285f4;
-      color: #fff;
-      text-decoration: none;
-      border-radius: 5px;
-      transition: background 0.3s;
-    }
-    .game a:hover {
-      background: #3367d6;
-    }
-    .game .apple-button {
-      background: #000;
-    }
-    .game .apple-button:hover {
-      background: #333;
-    }
-    .game .custom-button {
-      background: none;
-      padding: 0;
-      margin: 5px 0 15px;
-    }
-    .game .custom-button img {
-      width: 180px;
-      height: auto;
-      border-radius: 5px;
-      transition: transform 0.2s;
-    }
-    .game .custom-button img:hover {
-      transform: scale(1.05);
-    }
-    @media (max-width: 768px) {
-      .games {
-        flex-direction: column;
-        align-items: center;
-      }
-    }
-  </style>
+<!--
+  ============================================================
+  EDIT YOUR LINKS HERE
+  Paste a URL between the quotes. Leave it as "" to hide that
+  button on the page until you have the link.
+  ============================================================
+-->
+<script>
+const LINKS = {
+  // Unmatched Ego 2 (featured)
+  ego2_apple:        "https://apps.apple.com/us/app/unmatched-ego-2-soccer-3-v-3/id6775077290",
+  ego2_google:       "https://play.google.com/store/apps/details?id=com.willdev.UnmatchedEgo2",
+  ego2_crazygames:   "https://www.crazygames.com/game/unmatched-ego-2",
+
+  // Unmatched Ego
+  ego_apple:         "https://apps.apple.com/us/app/unmatched-ego-soccer-action/id6745162381",
+  ego_google:        "https://play.google.com/store/apps/details?id=com.willdev.RematchedEgo",
+  ego_crazygames:    "https://www.crazygames.com/game/unmatched-ego---soccer-action",
+
+  // Unmatched Basketball
+  basketball_apple:  "https://apps.apple.com/us/app/unmatched-basketball-2-0/id6753212939",
+  basketball_google: "https://play.google.com/store/apps/details?id=com.willdev.UnmatchedBasketball",
+  basketball_crazygames: "https://www.crazygames.com/game/unmatched-basketball",
+
+  // Project Breach 2
+  breach_apple:      "https://apps.apple.com/us/app/project-breach-2-coop-cqb-fps/id6747607854",
+  breach_google:     "https://play.google.com/store/apps/details?id=com.willdev.projectbreachremastered",
+
+  // Project Decay
+  decay_google:      "https://play.google.com/store/apps/details?id=com.willdev.ProjectDecay",
+
+  // Social (shown in the footer)
+  discord:           "",
+  youtube:           ""
+};
+</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Barlow:wght@400;600;700&display=swap" rel="stylesheet">
+<title>1Car2Wills Games</title>
+<meta name="description" content="Indie sports and action games by William Supian. Play Unmatched Ego 2 on iOS, Android and CrazyGames.">
+<style>
+  :root {
+    --bg: #ffffff;
+    --bg-2: #f4f4f4;
+    --line: #dcdcdc;
+    --text: #111111;
+    --muted: #666666;
+    --accent: #000000;
+    --radius: 14px;
+    --display: "Anton", "Impact", "Arial Narrow", sans-serif;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    font-family: "Barlow", "Segoe UI", system-ui, Arial, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+  }
+  a { color: inherit; }
+  a:focus-visible, button:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; }
+  img { max-width: 100%; display: block; }
+  .wrap { width: min(1120px, 100% - 40px); margin: 0 auto; }
+
+  /* Nav */
+  nav {
+    position: sticky; top: 0; z-index: 10;
+    background: rgba(255,255,255,.92); backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--line);
+  }
+  nav .wrap { display: flex; align-items: center; justify-content: space-between; height: 64px; }
+  .brand { font-family: var(--display); font-size: 26px; letter-spacing: .03em; text-transform: uppercase; text-decoration: none; color: var(--text); }
+  nav ul { display: flex; gap: 26px; list-style: none; margin: 0; padding: 0; }
+  nav ul a { text-decoration: none; color: var(--muted); font-weight: 600; font-size: 15px; }
+  nav ul a:hover { color: var(--text); }
+
+  /* Hero */
+  .hero {
+    min-height: 88vh; display: grid; place-items: center; text-align: center;
+    padding: 80px 0;
+    background:
+      repeating-linear-gradient(90deg, rgba(0,0,0,.035) 0 90px, transparent 90px 180px),
+      var(--bg);
+  }
+  .hero h1 {
+    margin: 0 0 18px;
+    font-family: var(--display); text-transform: uppercase;
+    font-size: clamp(60px, 13vw, 160px);
+    line-height: .92; letter-spacing: .01em; font-weight: 400;
+  }
+  .hero h1 { margin: 0 0 22px; line-height: 0; }
+  .hero-logo { margin: 0 auto; width: auto; max-width: min(680px, 90%); max-height: 420px; }
+  .hero p { margin: 0 auto 32px; max-width: 520px; color: var(--muted); font-size: 22px; }
+  .btns { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+  .btn {
+    display: inline-block; padding: 13px 28px; border-radius: 999px;
+    font-weight: 700; text-decoration: none; border: 2px solid var(--accent);
+    background: #000; color: #fff; transition: transform .15s, background .15s;
+  }
+  .btn:hover { transform: translateY(-2px); background: #333; border-color: #333; }
+  .btn.ghost { background: transparent; color: #000; border-color: #000; }
+  .btn.ghost:hover { background: #000; color: #fff; border-color: #000; }
+  .btn.small { padding: 9px 20px; font-size: 14px; }
+
+  section { padding: 90px 0; }
+  h2, h3 { font-family: var(--display); font-weight: 400; text-transform: uppercase; letter-spacing: .02em; }
+  h2 { font-size: clamp(34px, 5vw, 56px); line-height: 1.05; margin: 0 0 12px; }
+  .lead { color: var(--muted); max-width: 560px; margin: 0 0 40px; }
+
+  /* Featured */
+  .featured {
+    background: #000; color: #fff; border-block: 1px solid #000;
+    --text: #ffffff; --muted: #b8b8b8; --line: #3a3a3a; --accent: #ffffff;
+  }
+  .feature-grid { display: grid; grid-template-columns: 1.15fr 1fr; gap: 48px; align-items: center; }
+  .shot {
+    border-radius: var(--radius); overflow: hidden; aspect-ratio: 16/9;
+    background: linear-gradient(135deg, #2a2a2a, #111);
+    border: 1px solid var(--line);
+    box-shadow: 0 30px 60px rgba(0,0,0,.35);
+  }
+  .shot { position: relative; }
+  .shot img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+  .badge {
+    display: inline-block; background: #fff; color: #000;
+    font-weight: 800; font-size: 13px; padding: 4px 12px; border-radius: 999px; margin-bottom: 14px;
+  }
+  .stores { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 26px; }
+  .store {
+    display: inline-block; padding: 12px 22px; border-radius: 10px; text-decoration: none;
+    font-weight: 700; background: #fff; color: #000; transition: transform .15s;
+  }
+  .store:hover { transform: translateY(-2px); }
+  .store.cg { background: transparent; color: #fff; border: 2px solid #fff; padding: 10px 20px; }
+
+  /* Game grid */
+  .games { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 22px; }
+  .card {
+    background: #fff; border: 1px solid var(--line); border-radius: var(--radius);
+    overflow: hidden; display: flex; flex-direction: column; transition: box-shadow .2s;
+  }
+  .card .thumb { position: relative; width: 100%; aspect-ratio: 16 / 9; background: #111; overflow: hidden; }
+  .card .thumb img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+  .card .body { padding: 18px; display: flex; flex-direction: column; gap: 6px; flex: 1; }
+  .card h3 { margin: 0; font-size: 24px; }
+  .card p { margin: 0; color: var(--muted); font-size: 14px; }
+  .links { display: flex; flex-wrap: wrap; gap: 8px; margin-top: auto; padding-top: 14px; }
+  .links a {
+    font-size: 13px; font-weight: 700; text-decoration: none;
+    padding: 7px 14px; border-radius: 999px; border: 1px solid var(--line); color: var(--text);
+  }
+  .links a:hover { background: #000; border-color: #000; color: #fff; }
+
+  /* Studio */
+  .studio-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 40px; }
+  .studio-grid h3 { margin: 0 0 8px; font-size: 26px; }
+  .studio-grid p { margin: 0; color: var(--muted); }
+
+  footer { border-top: 1px solid var(--line); padding: 36px 0; color: var(--muted); font-size: 14px; }
+  footer .wrap { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
+
+  @media (max-width: 800px) {
+    nav ul { gap: 16px; }
+    nav ul li:nth-child(n+3) { display: none; }
+    .feature-grid { grid-template-columns: 1fr; gap: 32px; }
+    section { padding: 64px 0; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    * { transition: none !important; }
+  }
+.card:hover { box-shadow: 0 10px 28px rgba(0,0,0,.12); }
+  .foot-links { display: flex; flex-wrap: wrap; gap: 22px; }
+  .foot-links { align-items: center; }
+  .foot-links a { display: inline-flex; align-items: center; gap: 8px; font-weight: 700; text-decoration: none; color: var(--text); }
+  .foot-links a:hover { text-decoration: underline; }
+</style>
 </head>
 <body>
-  <header>
-    <img src="logo.png" alt="1Car2Wills Games Logo">
-    <p>Founded by William Supian</p>
-  </header>
 
-  <section class="games">
-    <!-- Unmatched Ego -->
-    <div class="game">
-      <img src="img1.png" alt="Rematched Ego">
-      <h2>Unmatched Ego</h2>
+<nav>
+  <div class="wrap">
+    <a class="brand" href="#top">1Car2Wills Games</a>
+    <ul>
+      <li><a href="#featured">Featured</a></li>
+      <li><a href="#games">Games</a></li>
+      <li><a href="#studio">Studio</a></li>
+    </ul>
+  </div>
+</nav>
 
-      <a href="https://play.google.com/store/apps/details?id=com.willdev.RematchedEgo" target="_blank">
-        View on Google Play
-      </a>
-      <br>
-      <a href="https://apps.apple.com/us/app/unmatched-ego-soccer-action/id6745162381"
-         target="_blank"
-         class="apple-button">
-        View on Apple Store
-      </a>
-      <br>
-      <a href="https://www.crazygames.com/game/unmatched-ego---soccer-action"
-         target="_blank"
-         class="custom-button">
-        <img src="PlayCG.png" alt="Play on CrazyGames">
-      </a>
+<header class="hero" id="top">
+  <div class="wrap">
+    <h1><img class="hero-logo" src="logo.png" alt="1Car2Wills Games"></h1>
+    <p>Reimagining mobile gaming.</p>
+    <div class="btns">
+      <a class="btn" href="#featured">Play Unmatched Ego 2</a>
+      <a class="btn ghost" href="#games">Browse all games</a>
     </div>
+  </div>
+</header>
 
-    <!-- Unmatched Basketball -->
-    <div class="game">
-      <img src="UBLogo.png" alt="Unmatched Basketball">
-      <h2>Unmatched Basketball</h2>
-      <a href="https://www.crazygames.com/game/unmatched-basketball"
-         target="_blank"
-         class="custom-button">
-        <img src="PlayCG.png" alt="Play on CrazyGames">
-      </a>
+<section class="featured" id="featured">
+  <div class="wrap feature-grid">
+    <div class="shot">
+      <!-- Replace with your Unmatched Ego 2 artwork -->
+      <img src="UE2.png" alt="Unmatched Ego 2 screenshot">
     </div>
+    <div>
+      <span class="badge">New release</span>
+      <h2>Unmatched Ego 2</h2>
+      <p class="lead" style="margin-bottom:0">
+        The next chapter of our soccer action series. Available now on Apple, Android and in your browser.
+      </p>
+      <div class="stores">
+        <a class="store" data-link="ego2_apple" target="_blank" rel="noopener">App Store</a>
+        <a class="store" data-link="ego2_google" target="_blank" rel="noopener">Google Play</a>
+        <a class="store cg" data-link="ego2_crazygames" target="_blank" rel="noopener">Play on CrazyGames</a>
+      </div>
+    </div>
+  </div>
+</section>
 
-    <!-- Project Breach 2 -->
-    <div class="game">
-      <img src="img2.png" alt="Project Breach Remastered">
-      <h2>Project Breach 2</h2>
-      <a href="https://play.google.com/store/apps/details?id=com.willdev.projectbreachremastered"
-         target="_blank">
-        View on Google Play
-      </a>
-    </div>
+<section id="games">
+  <div class="wrap">
+    <h2>Our games</h2>
+    <p class="lead">Pick a game and play on the platform you like.</p>
+    <div class="games">
 
-    <!-- Project Decay -->
-    <div class="game">
-      <img src="img3.png" alt="Project Decay">
-      <h2>Project Decay</h2>
-      <a href="https://play.google.com/store/apps/details?id=com.willdev.ProjectDecay"
-         target="_blank">
-        View on Google Play
-      </a>
+      <article class="card">
+        <div class="thumb"><img src="img1.png" alt="Unmatched Ego"></div>
+        <div class="body">
+          <h3>Unmatched Ego</h3>
+          <p>3v3 fast-paced third-person soccer</p>
+          <div class="links">
+            <a data-link="ego_apple" target="_blank" rel="noopener">App Store</a>
+            <a data-link="ego_google" target="_blank" rel="noopener">Google Play</a>
+            <a data-link="ego_crazygames" target="_blank" rel="noopener">CrazyGames</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="thumb"><img src="UBLogo.png" alt="Unmatched Basketball"></div>
+        <div class="body">
+          <h3>Unmatched Basketball</h3>
+          <p>3v3 third-person basketball</p>
+          <div class="links">
+            <a data-link="basketball_apple" target="_blank" rel="noopener">App Store</a>
+            <a data-link="basketball_google" target="_blank" rel="noopener">Google Play</a>
+            <a data-link="basketball_crazygames" target="_blank" rel="noopener">CrazyGames</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="thumb"><img src="img2.png" alt="Project Breach 2"></div>
+        <div class="body">
+          <h3>Project Breach 2</h3>
+          <p>Tactical close-quarters Co-op First Person Shooter.</p>
+          <div class="links">
+            <a data-link="breach_apple" target="_blank" rel="noopener">App Store</a>
+            <a data-link="breach_google" target="_blank" rel="noopener">Google Play</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="thumb"><img src="img3.png" alt="Project Decay"></div>
+        <div class="body">
+          <h3>Project Decay</h3>
+          <p> 4 player Co-op First person horror shooter.</p>
+          <div class="links">
+            <a data-link="decay_google" target="_blank" rel="noopener">Google Play</a>
+          </div>
+        </div>
+      </article>
+
     </div>
-  </section>
+  </div>
+</section>
+
+<section class="featured" id="studio">
+  <div class="wrap">
+    <h2 style="margin-bottom:32px">About the studio</h2>
+    <div class="studio-grid">
+      <div>
+        <h3>Built by a small team</h3>
+        <p>1Car2Wills Games was founded by William Supian. Every game is designed, built and updated by the people who play it.</p>
+      </div>
+      <div>
+        <h3>Play anywhere</h3>
+        <p>Our games run on Apple, Android and in the browser, so you can jump in on whatever screen is closest.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <span>&copy; 2026 1Car2Wills Games. Founded by William Supian.</span>
+    <span class="foot-links">
+      <a href="mailto:1car2wills@gmail.com" aria-label="Contact us by email"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg><span>Contact us: 1car2wills@gmail.com</span></a>
+      <a data-link="discord" target="_blank" rel="noopener" aria-label="Discord"><svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M20 5.200A17 17 0 0015.800 4l-.5 1a15 15 0 00-4.600 0l-.5-1A17 17 0 006 5.200C3.400 9 2.700 12.700 3 16.500a17 17 0 005 2.500l1-1.700c-.6-.2-1.100-.5-1.700-.8l.4-.3a12 12 0 0010.600 0l.4.3c-.5.3-1.100.6-1.700.8l1 1.700a17 17 0 005-2.500c.4-4.400-.7-8.100-3-11.300zM9 11.300a1.600 1.800 0 100 3.600 1.600 1.800 0 100-3.600zm6 0a1.600 1.800 0 100 3.600 1.600 1.800 0 100-3.600z"/></svg><span>Discord</span></a>
+      <a data-link="youtube" target="_blank" rel="noopener" aria-label="YouTube"><svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M21.600 7.200a2.500 2.500 0 00-1.800-1.800C18.200 5 12 5 12 5s-6.200 0-7.800.4A2.500 2.500 0 002.400 7.200C2 8.800 2 12 2 12s0 3.200.4 4.800a2.500 2.500 0 001.800 1.800C5.800 19 12 19 12 19s6.200 0 7.800-.4a2.500 2.500 0 001.800-1.800c.4-1.600.4-4.800.4-4.800s0-3.200-.4-4.800zM10 15V9l5.200 3-5.200 3z"/></svg><span>YouTube</span></a>
+      <a href="#top">Back to top</a>
+    </span>
+  </div>
+</footer>
+
+<script>
+  // Fills in every link from LINKS above; removes buttons with no link yet.
+  document.querySelectorAll("[data-link]").forEach(function (el) {
+    var url = LINKS[el.dataset.link];
+    if (url) { el.href = url; } else { el.remove(); }
+  });
+</script>
 </body>
 </html>
