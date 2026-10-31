@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rabona Physics | 1Car2Wills Games</title>
+<meta name="description" content="Rabona Physics: 4v4 street football battles with ragdoll physics. Coming soon from 1Car2Wills. Join the Discord.">
+<meta property="og:title" content="Rabona Physics - Coming Soon">
+<meta property="og:description" content="4v4 street football battles with ragdoll physics. Join the Discord.">
+<meta property="og:image" content="https://1car2wills.com/rabona/hero.webp">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Barlow:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #ffffff; --bg-2: #f4f4f4; --line: #dcdcdc; --text: #111; --muted: #666;
+    --yellow: #ffe11a; --discord: #5865f2; --discord-dark: #4752c4;
+    --radius: 14px;
+    --display: "Anton", "Impact", "Arial Narrow", sans-serif;
+  }
+  * { box-sizing: border-box; }
+  [hidden] { display: none !important; }
+  html { scroll-behavior: smooth; }
+  body { margin: 0; font-family: "Barlow", "Segoe UI", system-ui, Arial, sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
+  a { color: inherit; }
+  a:focus-visible { outline: 3px solid var(--discord); outline-offset: 3px; }
+  img { max-width: 100%; display: block; }
+  .wrap { width: min(1120px, 100% - 40px); margin: 0 auto; }
+
+  nav { position: sticky; top: 0; z-index: 10; background: rgba(255,255,255,.92); backdrop-filter: blur(10px); border-bottom: 1px solid var(--line); }
+  nav .wrap { display: flex; align-items: center; justify-content: space-between; height: 64px; }
+  .brand { font-family: var(--display); font-size: 26px; letter-spacing: .03em; text-transform: uppercase; text-decoration: none; }
+  nav a.back { text-decoration: none; color: var(--muted); font-weight: 600; font-size: 15px; }
+  nav a.back:hover { color: var(--text); }
+
+  .hero { position: relative; min-height: 86vh; display: grid; align-items: end; color: #fff; overflow: hidden; background: #000; }
+  .hero img.bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: left center; }
+  .hero::after { content: ""; position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,.85) 0%, rgba(0,0,0,.25) 45%, transparent 70%); }
+  .hero .wrap { position: relative; z-index: 1; padding: 0 0 64px; }
+  .tag { display: inline-block; background: var(--yellow); color: #000; font-weight: 700; text-transform: uppercase; letter-spacing: .08em; font-size: 13px; padding: 6px 14px; border-radius: 999px; margin-bottom: 14px; }
+  .hero h1 { font-family: var(--display); font-weight: 400; text-transform: uppercase; font-size: clamp(48px, 10vw, 120px); line-height: .95; margin: 0 0 12px; }
+  .sr { position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0 0 0 0); }
+  .hero h1 span { color: var(--yellow); }
+  .hero p { font-size: 21px; max-width: 560px; margin: 0 0 28px; color: #ddd; }
+
+  .btn { display: inline-flex; align-items: center; gap: 10px; padding: 14px 30px; border-radius: 999px; font-weight: 700; text-decoration: none; transition: transform .15s, background .15s; }
+  .btn:hover { transform: translateY(-2px); }
+  .btn-discord { background: var(--discord); color: #fff; font-size: 18px; box-shadow: 0 8px 28px rgba(88,101,242,.45); }
+  .btn-discord:hover { background: var(--discord-dark); }
+  .btn-discord svg { width: 26px; height: 26px; fill: currentColor; }
+
+  section { padding: 90px 0; }
+  h2 { font-family: var(--display); font-weight: 400; text-transform: uppercase; letter-spacing: .02em; font-size: clamp(34px, 5vw, 56px); line-height: 1.05; margin: 0 0 12px; }
+  .lead { color: var(--muted); max-width: 600px; margin: 0 0 40px; font-size: 18px; }
+
+  .features { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px; }
+  .feature { border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; background: #fff; }
+  .feature img { aspect-ratio: 16/9; object-fit: cover; width: 100%; }
+  .feature div { padding: 18px 22px 22px; }
+  .feature h3 { font-family: var(--display); font-weight: 400; text-transform: uppercase; font-size: 26px; margin: 0 0 6px; }
+  .feature p { margin: 0; color: var(--muted); }
+
+  .discord { background: var(--discord); color: #fff; }
+  .discord .wrap { display: grid; grid-template-columns: 1.2fr 1fr; gap: 40px; align-items: center; }
+  .discord .lead { color: #e3e5ff; }
+  .discord .btn-discord { background: #fff; color: var(--discord); box-shadow: 0 8px 28px rgba(0,0,0,.25); }
+  .discord .btn-discord:hover { background: #f0f1ff; }
+  .invite { background: #2b2d31; border-radius: var(--radius); padding: 22px; color: #dbdee1; box-shadow: 0 20px 50px rgba(0,0,0,.3); }
+  .invite small { text-transform: uppercase; font-weight: 700; font-size: 12px; letter-spacing: .05em; color: #b5bac1; }
+  .invite .row { display: flex; align-items: center; gap: 16px; margin: 14px 0 18px; }
+  .invite .icon { width: 56px; height: 56px; border-radius: 16px; background: var(--discord) center/cover; flex: none; display: grid; place-items: center; font-family: var(--display); font-size: 22px; color: #fff; }
+  .invite .name { color: #fff; font-weight: 700; font-size: 18px; }
+  .invite .counts { font-size: 14px; display: flex; gap: 14px; flex-wrap: wrap; }
+  .dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; margin-right: 5px; vertical-align: middle; }
+  .invite a.join { display: block; text-align: center; background: #248046; color: #fff; text-decoration: none; font-weight: 700; padding: 10px; border-radius: 6px; }
+  .invite a.join:hover { background: #1a6334; }
+
+  .shot { border-radius: var(--radius); overflow: hidden; border: 1px solid var(--line); }
+  footer { border-top: 1px solid var(--line); padding: 30px 0; color: var(--muted); font-size: 14px; }
+  footer .wrap { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 10px; }
+
+  @media (max-width: 800px) { .discord .wrap { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <a class="brand" href="/">1Car2Wills</a>
+    <a class="back" href="/">&larr; All games</a>
+  </div>
+</nav>
+
+<header class="hero">
+  <img class="bg" src="hero.webp" alt="Rabona Physics: two players colliding mid-air going for the ball">
+  <div class="wrap">
+    <span class="tag">Coming soon</span>
+    <h1 class="sr">Rabona Physics</h1>
+    <p>4v4 street football battles with wild ragdoll physics. Dive, flip and rabona your way to the win.</p>
+    <a class="btn btn-discord" href="https://discord.gg/Pfgn5bwYSz" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.32 4.37A19.8 19.8 0 0 0 15.4 2.8l-.23.46c1.8.44 2.63 1.07 3.5 1.84a14.7 14.7 0 0 0-12.95 0c.87-.77 1.84-1.46 3.5-1.84l-.23-.46a19.8 19.8 0 0 0-4.92 1.57C.9 9.04.06 13.59.48 18.08a19.9 19.9 0 0 0 6.03 3.04l.73-1.2a13 13 0 0 1-2.07-1l.5-.38a14.2 14.2 0 0 0 12.66 0l.5.38c-.66.39-1.35.73-2.08 1l.74 1.2a19.9 19.9 0 0 0 6.03-3.04c.5-5.2-.84-9.71-3.2-13.71ZM8.02 15.33c-1.18 0-2.15-1.08-2.15-2.42s.95-2.42 2.15-2.42 2.17 1.09 2.15 2.42c0 1.34-.95 2.42-2.15 2.42Zm7.96 0c-1.18 0-2.15-1.08-2.15-2.42s.95-2.42 2.15-2.42 2.17 1.09 2.15 2.42c0 1.34-.95 2.42-2.15 2.42Z"/></svg>
+      Join the Discord
+    </a>
+  </div>
+</header>
+
+<section>
+  <div class="wrap">
+    <h2>The game</h2>
+    <p class="lead">Fast online matches on gritty city rooftop pitches. Every tackle, dive and bicycle kick is driven by physics, so no two goals look the same.</p>
+    <div class="features">
+      <article class="feature">
+        <img src="4v4.webp" alt="4v4 match on a rooftop pitch" loading="lazy">
+        <div><h3>4v4 Battles</h3><p>Team up online and take over the rooftop pitch.</p></div>
+      </article>
+      <article class="feature">
+        <img src="ragdoll.webp" alt="Two players colliding in a ragdoll slide tackle" loading="lazy">
+        <div><h3>Ragdoll Physics</h3><p>Slide tackles, collisions and diving headers that go hilariously wrong.</p></div>
+      </article>
+      <article class="feature">
+        <img src="gameplay.webp" alt="Mobile gameplay with emoji reactions" loading="lazy">
+        <div><h3>Tricks &amp; Emojis</h3><p>Pull off tricks, then let your opponents know about it.</p></div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="discord" id="discord">
+  <div class="wrap">
+    <div>
+      <h2>Join the community</h2>
+      <p class="lead">Rabona Physics isn't out yet. Join the Discord for development updates, sneak peeks and first access to playtests.</p>
+      <a class="btn btn-discord" href="https://discord.gg/Pfgn5bwYSz" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.32 4.37A19.8 19.8 0 0 0 15.4 2.8l-.23.46c1.8.44 2.63 1.07 3.5 1.84a14.7 14.7 0 0 0-12.95 0c.87-.77 1.84-1.46 3.5-1.84l-.23-.46a19.8 19.8 0 0 0-4.92 1.57C.9 9.04.06 13.59.48 18.08a19.9 19.9 0 0 0 6.03 3.04l.73-1.2a13 13 0 0 1-2.07-1l.5-.38a14.2 14.2 0 0 0 12.66 0l.5.38c-.66.39-1.35.73-2.08 1l.74 1.2a19.9 19.9 0 0 0 6.03-3.04c.5-5.2-.84-9.71-3.2-13.71ZM8.02 15.33c-1.18 0-2.15-1.08-2.15-2.42s.95-2.42 2.15-2.42 2.17 1.09 2.15 2.42c0 1.34-.95 2.42-2.15 2.42Zm7.96 0c-1.18 0-2.15-1.08-2.15-2.42s.95-2.42 2.15-2.42 2.17 1.09 2.15 2.42c0 1.34-.95 2.42-2.15 2.42Z"/></svg>
+        discord.gg/Pfgn5bwYSz
+      </a>
+    </div>
+    <!-- Invite card: live name/icon/member counts are loaded from Discord's public invite API. Falls back to static text if that fails. -->
+    <div class="invite">
+      <small>You've been invited to join a server</small>
+      <div class="row">
+        <div class="icon" id="dc-icon">R</div>
+        <div>
+          <div class="name" id="dc-name">Rabona Physics</div>
+          <div class="counts" id="dc-counts" hidden>
+            <span><i class="dot" style="background:#23a55a"></i><b id="dc-online">0</b> Online</span>
+            <span><i class="dot" style="background:#80848e"></i><b id="dc-members">0</b> Members</span>
+          </div>
+        </div>
+      </div>
+      <a class="join" href="https://discord.gg/Pfgn5bwYSz" target="_blank" rel="noopener">Join Server</a>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="shot"><img src="shot.webp" alt="Player number 19 curling a shot towards goal" loading="lazy"></div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <span>&copy; <span id="yr"></span> 1Car2Wills</span>
+    <span><a href="/">More games</a> &middot; <a href="https://discord.gg/Pfgn5bwYSz" target="_blank" rel="noopener">Discord</a> &middot; <a href="mailto:1car2wills@gmail.com">1car2wills@gmail.com</a></span>
+  </div>
+</footer>
+
+<script>
+  document.getElementById("yr").textContent = new Date().getFullYear();
+  fetch("https://discord.com/api/v10/invites/Pfgn5bwYSz?with_counts=true")
+    .then(r => r.ok ? r.json() : Promise.reject())
+    .then(d => {
+      if (d.guild) {
+        document.getElementById("dc-name").textContent = d.guild.name;
+        if (d.guild.icon) {
+          const ic = document.getElementById("dc-icon");
+          ic.style.backgroundImage = `url(https://cdn.discordapp.com/icons/${d.guild.id}/${d.guild.icon}.png?size=128)`;
+          ic.textContent = "";
+        }
+      }
+      if (d.approximate_member_count != null) {
+        document.getElementById("dc-online").textContent = d.approximate_presence_count.toLocaleString();
+        document.getElementById("dc-members").textContent = d.approximate_member_count.toLocaleString();
+        document.getElementById("dc-counts").hidden = false;
+      }
+    })
+    .catch(() => {});
+</script>
+</body>
+</html>
